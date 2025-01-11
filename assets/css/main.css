@@ -577,6 +577,11 @@ section,
   transition: 0.3s;
 }
 
+.hero .ar a{
+  margin-left: 20px;
+  margin-right: 0px;
+}
+
 .hero .social-links a:hover {
   color: var(--accent-color);
 }
