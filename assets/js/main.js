@@ -227,3 +227,12 @@
   document.addEventListener('scroll', navmenuScrollspy);
 
 })();
+
+/*
+* set date
+*/
+const date = document.querySelector(".date");
+
+const year = new Date().getFullYear();
+
+date.innerHTML = year;
