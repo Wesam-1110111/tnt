@@ -1492,3 +1492,7 @@ section,
   margin-right: 0;
   margin-left: 15px;
 }
+
+.navmenu .lang-icon{
+  width: 40%;
+}
