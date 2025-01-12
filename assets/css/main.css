@@ -147,6 +147,7 @@ h6 {
   position: fixed;
   top: 0;
   left: 0;
+  /* right: 0; */
   bottom: 0;
   padding: 0 15px;
   transition: all ease-in-out 0.3s;
@@ -575,11 +576,6 @@ section,
   line-height: 1;
   margin-right: 20px;
   transition: 0.3s;
-}
-
-.hero .ar a{
-  margin-left: 20px;
-  margin-right: 0px;
 }
 
 .hero .social-links a:hover {
@@ -1457,8 +1453,42 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Starter Section Section
+# Arabic Page
 --------------------------------------------------------------*/
-.starter-section {
-  /* Add your styles here */
+
+
+
+.hero .ar a{
+  margin-left: 20px;
+  margin-right: 0px;
+}
+
+.about .content ul .ar-ul {
+  margin-left: 10px;
+  margin-right: 2px;
+}
+
+.resume .ar-resume {
+  padding: 0 20px 20px 0;
+  margin-top: -2px;
+  border-right: 2px solid var(--accent-color);
+  position: relative;
+  border-left: none;
+}
+
+.resume .ar-resume::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  right: -9px;
+  top: 0;
+  background: var(--background-color);
+  border: 2px solid var(--accent-color);
+}
+
+.contact .info-item .ar-contact {
+  margin-right: 0;
+  margin-left: 15px;
 }
