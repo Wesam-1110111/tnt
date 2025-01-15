@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+      <style>
+        /* تصميم الزر */
+.toggle-theme {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 60px;
+  height: 30px;
+  background: var(--background-color);
+  border: 2px solid var(--text-color);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.toggle-theme .circle {
+  width: 25px;
+  height: 25px;
+  background: var(--text-color);
+  border-radius: 50%;
+  transition: transform 0.3s ease, background 0.3s;
+}
+
+body.dark-mode .toggle-theme {
+  background: var(--text-color);
+  border-color: var(--background-color);
+}
+
+body.dark-mode .toggle-theme .circle {
+  transform: translateX(30px);
+  background: var(--background-color);
+}
+        
+      </style>
+    </head>
+    <body>
+        <div class="toggle-theme">
+  <div class="circle"></div>
+</div>
+
+      <script>
+        const toggleThemeButton = document.querySelector(".toggle-theme");
+const body = document.body;
+
+toggleThemeButton.addEventListener("click", () => {
+  body.classList.toggle("dark-mode");
+
+  // حفظ الوضع في localStorage
+  if (body.classList.contains("dark-mode")) {
+    localStorage.setItem("theme", "dark");
+  } else {
+    localStorage.setItem("theme", "light");
+  }
+});
+
+// تحميل الوضع المحفوظ عند فتح الصفحة
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    body.classList.add("dark-mode");
+  }
+});
+                                   
+      </script>
+    </body>
+</html>
