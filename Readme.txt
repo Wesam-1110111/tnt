@@ -6,4 +6,4 @@ License: https://bootstrapmade.com/license/
 
 Main Page: www.wesam.online
 Arabic Page: www.wesam.online/ar
-Dark Mood: www.wesam.online/test
+Dark Mode (Beta): www.wesam.online/test
