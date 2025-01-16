@@ -26,6 +26,7 @@
 document.getElementById('theme-checkbox').addEventListener('change', function() {
     document.body.classList.toggle('dark-theme');
 });
+const body = document.body;
 
 if (body.classList.contains("dark-theme")) {
     localStorage.setItem("theme", "dark");
