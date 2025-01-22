@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // التحقق من صحة البريد الإلكتروني
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         // إعداد بيانات البريد
-        $to = "your_email@example.com"; // استبدل بـ بريدك الإلكتروني
+        $to = "mrw202065@gmail.com"; // استبدل بـ بريدك الإلكتروني
         $subject = "New Message from $name";
         $body = "Name: $name\nEmail: $email\n\nMessage:\n$message";
         $headers = "From: $email";
