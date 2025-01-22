@@ -383,38 +383,42 @@
 </div>
 
 <script>
-    const form = document.getElementById('contactForm');
-    const loading = document.querySelector('.loading');
-    const errorMessage = document.querySelector('.error-message');
-    const sentMessage = document.querySelector('.sent-message');
-
     form.addEventListener('submit', function (event) {
-        event.preventDefault(); // منع الإرسال الافتراضي للنموذج
-        loading.style.display = 'block'; // عرض رسالة التحميل
-        errorMessage.style.display = 'none'; // إخفاء رسالة الخطأ
-        sentMessage.style.display = 'none'; // إخفاء رسالة النجاح
+    event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+    loading.style.display = 'block'; // عرض رسالة التحميل
+    errorMessage.style.display = 'none'; // إخفاء رسالة الخطأ
+    sentMessage.style.display = 'none'; // إخفاء رسالة النجاح
 
-        const formData = new FormData(form);
+    const formData = new FormData(form);
 
-        fetch(form.action, {
-            method: form.method,
-            body: formData,
-            headers: {
-                'Accept': 'application/json'
-            }
-        }).then(response => {
-            loading.style.display = 'none'; // إخفاء رسالة التحميل
-            if (response.ok) {
-                sentMessage.style.display = 'block'; // عرض رسالة النجاح
-                form.reset(); // إعادة تعيين النموذج
-            } else {
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        loading.style.display = 'none'; // إخفاء رسالة التحميل
+        if (response.ok) {
+            sentMessage.style.display = 'block'; // عرض رسالة النجاح
+            form.reset(); // إعادة تعيين النموذج
+        } else {
+            response.json().then(data => {
+                if (data.error) {
+                    errorMessage.textContent = data.error; // عرض رسالة الخطأ القادمة من Formspree
+                } else {
+                    errorMessage.textContent = 'There was an error sending your message. Please try again.'; // عرض رسالة خطأ عامة
+                }
                 errorMessage.style.display = 'block'; // عرض رسالة الخطأ
-            }
-        }).catch(error => {
-            loading.style.display = 'none'; // إخفاء رسالة التحميل
-            errorMessage.style.display = 'block'; // عرض رسالة الخطأ
-        });
+            });
+        }
+    }).catch(error => {
+        loading.style.display = 'none'; // إخفاء رسالة التحميل
+        errorMessage.textContent = 'There was an error sending your message. Please try again.'; // عرض رسالة خطأ عامة
+        errorMessage.style.display = 'block'; // عرض رسالة الخطأ
     });
+});
+
 </script>
 <!-- End Contact Form -->
 
