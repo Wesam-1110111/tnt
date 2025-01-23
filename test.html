@@ -383,41 +383,59 @@
 </div>
 
 <script>
-    form.addEventListener('submit', function (event) {
-    event.preventDefault(); // منع الإرسال الافتراضي للنموذج
-    loading.style.display = 'block'; // عرض رسالة التحميل
-    errorMessage.style.display = 'none'; // إخفاء رسالة الخطأ
-    sentMessage.style.display = 'none'; // إخفاء رسالة النجاح
+    // تحديد عناصر النموذج والرسائل
+const form = document.getElementById('contactForm');
+const loading = document.querySelector('.loading');
+const errorMessage = document.querySelector('.error-message');
+const sentMessage = document.querySelector('.sent-message');
 
+// إضافة مستمع للحدث 'submit' على النموذج
+form.addEventListener('submit', function (event) {
+    event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+
+    // عرض حالة التحميل وإخفاء الرسائل الأخرى
+    loading.style.display = 'block';
+    errorMessage.style.display = 'none';
+    sentMessage.style.display = 'none';
+
+    // جمع بيانات النموذج
     const formData = new FormData(form);
 
+    // إرسال البيانات باستخدام fetch
     fetch(form.action, {
         method: form.method,
         body: formData,
         headers: {
-            'Accept': 'application/json'
+            'Accept': 'application/json' // تحديد نوع الرد المتوقع
         }
-    }).then(response => {
-        loading.style.display = 'none'; // إخفاء رسالة التحميل
+    })
+    .then(response => {
+        loading.style.display = 'none'; // إخفاء حالة التحميل
+
         if (response.ok) {
-            sentMessage.style.display = 'block'; // عرض رسالة النجاح
-            form.reset(); // إعادة تعيين النموذج
+            // في حالة النجاح
+            sentMessage.style.display = 'block';
+            form.reset(); // إعادة تعيين الحقول في النموذج
         } else {
+            // إذا كان هناك خطأ في الاستجابة
             response.json().then(data => {
                 if (data.error) {
-                    errorMessage.textContent = data.error; // عرض رسالة الخطأ القادمة من Formspree
+                    errorMessage.textContent = data.error; // عرض رسالة الخطأ من الخادم
                 } else {
-                    errorMessage.textContent = 'There was an error sending your message. Please try again.'; // عرض رسالة خطأ عامة
+                    errorMessage.textContent = 'There was an error sending your message. Please try again.';
                 }
-                errorMessage.style.display = 'block'; // عرض رسالة الخطأ
+                errorMessage.style.display = 'block';
             });
         }
-    }).catch(error => {
-        loading.style.display = 'none'; // إخفاء رسالة التحميل
-        errorMessage.textContent = 'There was an error sending your message. Please try again.'; // عرض رسالة خطأ عامة
-        errorMessage.style.display = 'block'; // عرض رسالة الخطأ
+    })
+    .catch(error => {
+        // إذا كان هناك خطأ في الاتصال
+        loading.style.display = 'none';
+        errorMessage.textContent = 'There was an error sending your message. Please try again.';
+        errorMessage.style.display = 'block';
     });
 });
+  
 
 </script>
 <!-- End Contact Form -->
