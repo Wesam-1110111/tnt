@@ -1534,7 +1534,4 @@ CV downloader btn
   background-color: #0563bb !important;
 } */
 
-.cv-download::after {
-  content: 'Download Resume';
 
-}
