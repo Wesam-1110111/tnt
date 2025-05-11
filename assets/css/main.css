@@ -1538,7 +1538,3 @@ CV downloader btn
   content: 'Download Resume';
 
 }
-
-.cv-btn:hover::after {
-  opacity: 1;
-}
