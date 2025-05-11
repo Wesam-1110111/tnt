@@ -1533,21 +1533,10 @@ CV downloader btn
 /* .cv-download::hover{
   background-color: #0563bb !important;
 } */
- 
+
 .cv-download::after {
   content: 'Download Resume';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  color: white;
-  background-color: #0056b3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: 0.3s;
+
 }
 
 .cv-btn:hover::after {
