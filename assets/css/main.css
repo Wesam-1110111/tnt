@@ -1496,3 +1496,22 @@ section,
 .navmenu .lang-icon{
   width: 40%;
 }
+
+
+/* -------------------------
+CV downloader btn
+---------------------------*/
+
+.cv-download{
+  background-color: #f3f3f3;
+  padding: 10px;
+  border-radius: 50%;
+
+}
+.cv-download i{
+  font-size: 24px;
+}
+
+.under-cv{
+  margin-top: 10px;
+}
