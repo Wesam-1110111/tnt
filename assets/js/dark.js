@@ -5,8 +5,8 @@ const footer = document.getElementById('footer');
 // Load the saved theme
 if (localStorage.getItem('theme') === 'dark') {
     document.body.classList.add('dark-theme');
-    hero.classList.add('dark-theme');
-    footer.classList.add('dark-theme');
+    hero.classList.add('dark-background');
+    footer.classList.add('dark-background');
 
     themeCheckbox.checked = true;
 }
@@ -15,14 +15,14 @@ if (localStorage.getItem('theme') === 'dark') {
 themeCheckbox.addEventListener('change', function() {
     if (themeCheckbox.checked) {
         document.body.classList.add('dark-theme');
-        hero.classList.add('dark-theme');
-        footer.classList.add('dark-theme');
+        hero.classList.add('dark-background');
+        footer.classList.add('dark-background');
 
         localStorage.setItem('theme', 'dark');
     } else {
         document.body.classList.remove('dark-theme');
-        hero.classList.remove('dark-theme');
-        footer.classList.remove('dark-theme');
+        hero.classList.remove('dark-background');
+        footer.classList.remove('dark-background');
 
         localStorage.setItem('theme', 'light');
     }
