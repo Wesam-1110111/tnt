@@ -11,6 +11,9 @@ body {
 body.dark-theme {
   --background-color: #212121;
   --text-color: #ffffff;
+  --heading-color: #999;
+  --nav-mobile-background-color: #212121;
+  --nav-dropdown-background-color: #212121;
 }
 
 /* From Uiverse.io by MRez321 */ 
