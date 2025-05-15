@@ -17,7 +17,7 @@ body.dark-theme {
   --default-color: #c5c5c5;
 }
 
-.light-background {
+.dark-background {
   --background-color: #2c2c2c;
   --surface-color: #ffffff;
 }
