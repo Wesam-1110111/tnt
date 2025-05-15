@@ -17,6 +17,10 @@ body.dark-theme {
   --default-color: #c5c5c5;
 }
 
+.light-background {
+  --background-color: #2c2c2c;
+  --surface-color: #ffffff;
+}
 /* From Uiverse.io by MRez321 */ 
 .theme-switch {
   position: relative;
