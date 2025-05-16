@@ -93,10 +93,12 @@ h6 {
   display: none;
   background: #df1529;
   color: #ffffff;
-  text-align: left;
+  text-align: center;
   padding: 15px;
   margin-bottom: 24px;
   font-weight: 600;
+  display: none !important;
+  
 }
 
 .php-email-form .sent-message {
