@@ -376,7 +376,7 @@
             <div class="col-md-12 text-center">
                 <div class="loading" style="display: none;">Loading...</div>
                 <div class="error-message" style="display: none; color: #fff;">There was an error sending your message. Please try again.</div>
-                <div id="confirmationMessage" class="sent-message" style="display: none; color: #fff;">Your message has been sent. Thank you!</div>
+                <div class="sent-message" style="display: none; color: #fff;">Your message has been sent. Thank you!</div>
 
 
                 <div class="col-md-12 text-center">
@@ -393,61 +393,70 @@
 </div>
 
 <script>
-    // تحديد عناصر النموذج والرسائل
-const form = document.getElementById('contactForm');
-const loading = document.querySelector('.loading');
-const errorMessage = document.querySelector('.error-message');
-const sentMessage = document.querySelector('.sent-message');
+  // تحديد عناصر النموذج والرسائل
+  const form = document.getElementById('contactForm');
+  const loading = document.querySelector('.loading');
+  const errorMessage = document.querySelector('.error-message');
+  const sentMessage = document.querySelector('.sent-message');
 
-// إضافة مستمع للحدث 'submit' على النموذج
-form.addEventListener('submit', function (event) {
-    event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+  // وظيفة لإخفاء الرسائل بعد وقت محدد
+  function hideMessage(element, delay = 5000) {
+      setTimeout(() => {
+          element.style.display = 'none';
+      }, delay); // الوقت بالمللي ثانية
+  }
 
-    // عرض حالة التحميل وإخفاء الرسائل الأخرى
-    loading.style.display = 'block';
-    errorMessage.style.display = 'none';
-    sentMessage.style.display = 'none';
+  // إضافة مستمع للحدث 'submit' على النموذج
+  form.addEventListener('submit', function (event) {
+      event.preventDefault(); // منع الإرسال الافتراضي للنموذج
 
-    // جمع بيانات النموذج
-    const formData = new FormData(form);
+      // عرض حالة التحميل وإخفاء الرسائل الأخرى
+      loading.style.display = 'block';
+      errorMessage.style.display = 'none';
+      sentMessage.style.display = 'none';
 
-    // إرسال البيانات باستخدام fetch
-    fetch(form.action, {
-        method: form.method,
-        body: formData,
-        headers: {
-            'Accept': 'application/json' // تحديد نوع الرد المتوقع
-        }
-    })
-    .then(response => {
-        loading.style.display = 'none'; // إخفاء حالة التحميل
+      // جمع بيانات النموذج
+      const formData = new FormData(form);
 
-        if (response.ok) {
-            // في حالة النجاح
-            sentMessage.style.display = 'block';
-            form.reset(); // إعادة تعيين الحقول في النموذج
-        } else {
-            // إذا كان هناك خطأ في الاستجابة
-            response.json().then(data => {
-                if (data.error) {
-                    errorMessage.textContent = data.error; // عرض رسالة الخطأ من الخادم
-                } else {
-                    errorMessage.textContent = 'There was an error sending your message. Please try again.';
-                }
-                errorMessage.style.display = 'block';
-            });
-        }
-    })
-    .catch(error => {
-        // إذا كان هناك خطأ في الاتصال
-        loading.style.display = 'none';
-        errorMessage.textContent = 'There was an error sending your message. Please try again.';
-        errorMessage.style.display = 'block';
-    });
-});
-  
+      // إرسال البيانات باستخدام fetch
+      fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+              'Accept': 'application/json' // تحديد نوع الرد المتوقع
+          }
+      })
+      .then(response => {
+          loading.style.display = 'none'; // إخفاء حالة التحميل
 
+          if (response.ok) {
+              // في حالة النجاح
+              sentMessage.style.display = 'block';
+              hideMessage(sentMessage); // إخفاء رسالة النجاح بعد 5 ثوانٍ
+              form.reset(); // إعادة تعيين الحقول في النموذج
+          } else {
+              // إذا كان هناك خطأ في الاستجابة
+              response.json().then(data => {
+                  if (data.error) {
+                      errorMessage.textContent = data.error; // عرض رسالة الخطأ من الخادم
+                  } else {
+                      errorMessage.textContent = 'There was an error sending your message. Please try again.';
+                  }
+                  errorMessage.style.display = 'block';
+                  hideMessage(errorMessage); // إخفاء رسالة الخطأ بعد 5 ثوانٍ
+              });
+          }
+      })
+      .catch(error => {
+          // إذا كان هناك خطأ في الاتصال
+          loading.style.display = 'none';
+          errorMessage.textContent = 'There was an error sending your message. Please try again.';
+          errorMessage.style.display = 'block';
+          hideMessage(errorMessage); // إخفاء رسالة الخطأ بعد 5 ثوانٍ
+      });
+  });
 </script>
+
 <!-- End Contact Form -->
 
         </div>
