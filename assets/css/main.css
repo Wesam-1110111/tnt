@@ -1537,3 +1537,10 @@ CV downloader btn
 } */
 
 
+#confirmationMessage {
+  transition: opacity 1s ease;
+}
+
+#confirmationMessage.hidden {
+  opacity: 0;
+}
