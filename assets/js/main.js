@@ -247,7 +247,7 @@ date.innerHTML = year;
 setTimeout(function() {
   var message = document.getElementById('confirmationMessage');
   if (message) {
-      message.classList.add('hidden'); // إضافة صنف التلاشي
+      message.classList.toggle('hidden'); // إضافة صنف التلاشي
       setTimeout(function() {
           message.style.display = 'none'; // إخفاء العنصر تمامًا بعد التلاشي
       }, 1000); // وقت التلاشي
