@@ -236,3 +236,20 @@ const date = document.querySelector(".date");
 const year = new Date().getFullYear();
 
 date.innerHTML = year;
+
+
+/****************
+ * 
+ * make the messge gone
+ * 
+ ****************/
+
+setTimeout(function() {
+  var message = document.getElementById('confirmationMessage');
+  if (message) {
+      message.classList.add('hidden'); // إضافة صنف التلاشي
+      setTimeout(function() {
+          message.style.display = 'none'; // إخفاء العنصر تمامًا بعد التلاشي
+      }, 1000); // وقت التلاشي
+  }
+}, 5000);
