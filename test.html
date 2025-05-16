@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Wesam | Web Developer</title>
+  <title>Testing</title>
   <meta content="Explore Wesam's portfolio, resume, and projects as a full-stack developer specializing in modern web technologies." name="description">
   <meta content="Wesam full-stack Developer Libya online front-end back-end php javascript html css bootstrap laravel web Freelance Freelancer btc bitcoin ai openai chatgpt Technology" name="keywords">
   
@@ -36,7 +36,8 @@
   <!-- Dark Theme CSS -->
   <link href="assets/css/dark.css" rel="stylesheet">
 
-  
+  <!-- reCaptcha code api -->
+  <secript sec="https://www.google.com/recaptcha/enterprise.js?render=6LdJYMMqAAAAAMMTffWUJRNXgNfDYgPsa9m97bsb"></secript>
 
 </head>
 
@@ -261,8 +262,8 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h2>Resume</h2>
-        <p>Innovative web developer with 1+ year of experience specializing in user-centered, high-performance website design and development. Skilled in problem-solving and teamwork.</p>
+        <h2>Resume</h2><a href="cv/CV 2025.pdf" class="icon resume cv-download" target="_blank" download="Resume" aria-label="Download Resume" title="Download Resume"><i class="bi bi-download"></i></a>                       <!-- add cv downloader here -->
+        <p class="under-cv">Innovative web developer with 1+ year of experience specializing in user-centered, high-performance website design and development. Skilled in problem-solving and teamwork.</p>
       </div><!-- End Section Title -->
 
       <div class="container">
@@ -350,36 +351,104 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-              <div class="row gy-4">
+    <form id="contactForm" action="https://formspree.io/f/xqaekaab" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <div class="row gy-4">
+                <input type="hidden" name="_redirect" value="https://wesam.online">
+          <input type="hidden" name="_key" value="abc123ewq">
+          
+    
+            <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+            </div>
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-                </div>
+            <div class="col-md-6">
+                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+            </div>
 
-                <div class="col-md-6 ">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-                </div>
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+            </div>
 
-                <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-                </div>
+            <div class="col-md-12">
+                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+            </div>
 
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-                </div>
+            <div class="col-md-12 text-center">
+                <div class="loading" style="display: none;">Loading...</div>
+                <div class="error-message" style="display: none; color: red;">There was an error sending your message. Please try again.</div>
+                <div class="sent-message" style="display: none; color: green;">Your message has been sent. Thank you!</div>
+
 
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
                   <!-- <div class="error-message"></div> -->
                   <div class="sent-message">Your message has been sent. Thank you!</div>
 
-                  <button type="submit">Send Message</button>
-                </div>
+                <button type="submit">Send Message</button>
+            </div>
 
-              </div>
-            </form>
-          </div><!-- End Contact Form -->
+
+        </div>
+    </form>
+</div>
+
+<script>
+    // تحديد عناصر النموذج والرسائل
+const form = document.getElementById('contactForm');
+const loading = document.querySelector('.loading');
+const errorMessage = document.querySelector('.error-message');
+const sentMessage = document.querySelector('.sent-message');
+
+// إضافة مستمع للحدث 'submit' على النموذج
+form.addEventListener('submit', function (event) {
+    event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+
+    // عرض حالة التحميل وإخفاء الرسائل الأخرى
+    loading.style.display = 'block';
+    errorMessage.style.display = 'none';
+    sentMessage.style.display = 'none';
+
+    // جمع بيانات النموذج
+    const formData = new FormData(form);
+
+    // إرسال البيانات باستخدام fetch
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: {
+            'Accept': 'application/json' // تحديد نوع الرد المتوقع
+        }
+    })
+    .then(response => {
+        loading.style.display = 'none'; // إخفاء حالة التحميل
+
+        if (response.ok) {
+            // في حالة النجاح
+            sentMessage.style.display = 'block';
+            form.reset(); // إعادة تعيين الحقول في النموذج
+        } else {
+            // إذا كان هناك خطأ في الاستجابة
+            response.json().then(data => {
+                if (data.error) {
+                    errorMessage.textContent = data.error; // عرض رسالة الخطأ من الخادم
+                } else {
+                    errorMessage.textContent = 'There was an error sending your message. Please try again.';
+                }
+                errorMessage.style.display = 'block';
+            });
+        }
+    })
+    .catch(error => {
+        // إذا كان هناك خطأ في الاتصال
+        loading.style.display = 'none';
+        errorMessage.textContent = 'There was an error sending your message. Please try again.';
+        errorMessage.style.display = 'block';
+    });
+});
+  
+
+</script>
+<!-- End Contact Form -->
 
         </div>
 
@@ -439,6 +508,14 @@
   <!-- Dark Theme JS -->
   <script src="assets/js/dark.js"></script>
 
+  <script>
+  function onClick(e) {
+    e.preventDefault();
+    grecaptcha.enterprise.ready(async () => {
+      const token = await grecaptcha.enterprise.execute('6LdJYMMqAAAAAMMTffWUJRNXgNfDYgPsa9m97bsb', {action: 'LOGIN'});
+    });
+  }
+  </script>
 </body>
 
 </html>
