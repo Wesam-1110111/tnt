@@ -375,6 +375,114 @@
               </div>
             </form>
           </div>End Contact Form -->
+          <div class="col-lg-8">
+    <form id="contactForm" action="https://formspree.io/f/xqaekaab" method="post" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
+        <div class="row gy-4">
+                <!-- <input type="hidden" name="_redirect" value="https://wesam.online"> -->
+          <input type="hidden" name="_key" value="abc123ewq">
+          
+    
+            <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="الإسم" required>
+            </div>
+
+            <div class="col-md-6">
+                <input type="email" class="form-control" name="email" placeholder="بريدك الإلكتروني" required>
+            </div>
+
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="subject" placeholder="الموضوع" required>
+            </div>
+
+            <div class="col-md-12">
+                <textarea class="form-control" name="message" rows="6" placeholder="الرسالة" required></textarea>
+            </div>
+
+            <div class="col-md-12 text-center">
+                <div class="loading" style="display: none;">تحميل...</div>
+                <div class="error-message" style="display: none; color: #fff;">There was an error sending your message. Please try again.</div>
+                <div class="sent-message" style="display: none; color: #fff;">تم إرسال رسالتك. شكراً لك!</div>
+
+
+                <div class="col-md-12 text-center">
+                  <div class="loading">تحميل...</div>
+                  <!-- <div class="error-message"></div> -->
+                  <div class="sent-message">تم إرسال رسالتك. شكراً لك!</div>
+
+                <button type="submit">إرسال</button>
+            </div>
+
+
+        </div>
+    </form>
+</div>
+
+<script>
+  // تحديد عناصر النموذج والرسائل
+  const form = document.getElementById('contactForm');
+  const loading = document.querySelector('.loading');
+  const errorMessage = document.querySelector('.error-message');
+  const sentMessage = document.querySelector('.sent-message');
+
+  // وظيفة لإخفاء الرسائل بعد وقت محدد
+  function hideMessage(element, delay = 5000) {
+      setTimeout(() => {
+          element.style.display = 'none';
+      }, delay); // الوقت بالمللي ثانية
+  }
+
+  // إضافة مستمع للحدث 'submit' على النموذج
+  form.addEventListener('submit', function (event) {
+      event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+
+      // عرض حالة التحميل وإخفاء الرسائل الأخرى
+      loading.style.display = 'block';
+      errorMessage.style.display = 'none';
+      sentMessage.style.display = 'none';
+
+      // جمع بيانات النموذج
+      const formData = new FormData(form);
+
+      // إرسال البيانات باستخدام fetch
+      fetch(form.action, {
+          method: form.method,
+          body: formData,
+          headers: {
+              'Accept': 'application/json' // تحديد نوع الرد المتوقع
+          }
+      })
+      .then(response => {
+          loading.style.display = 'none'; // إخفاء حالة التحميل
+
+          if (response.ok) {
+              // في حالة النجاح
+              sentMessage.style.display = 'block';
+              hideMessage(sentMessage); // إخفاء رسالة النجاح بعد 5 ثوانٍ
+              form.reset(); // إعادة تعيين الحقول في النموذج
+          } else {
+              // إذا كان هناك خطأ في الاستجابة
+              response.json().then(data => {
+                  if (data.error) {
+                      errorMessage.textContent = data.error; // عرض رسالة الخطأ من الخادم
+                  } else {
+                      errorMessage.textContent = 'There was an error sending your message. Please try again.';
+                  }
+                  errorMessage.style.display = 'block';
+                  hideMessage(errorMessage); // إخفاء رسالة الخطأ بعد 5 ثوانٍ
+              });
+          }
+      })
+      .catch(error => {
+          // إذا كان هناك خطأ في الاتصال
+          loading.style.display = 'none';
+          errorMessage.textContent = 'There was an error sending your message. Please try again.';
+          errorMessage.style.display = 'block';
+          hideMessage(errorMessage); // إخفاء رسالة الخطأ بعد 5 ثوانٍ
+      });
+  });
+</script>
+
+<!-- End Contact Form -->
 
         </div>
 
